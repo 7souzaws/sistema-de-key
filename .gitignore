@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+dist/
+build/
+
+# Variaveis de ambiente (NAO commitar - contem chaves secretas)
+.env
+.env.local
+.env.production
+backend/.env
+frontend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Build de C++
+*.exe
+*.obj
+*.res
+x64/

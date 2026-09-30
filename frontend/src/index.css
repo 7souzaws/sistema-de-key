@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0a0a0a;
+    background-image:
+      radial-gradient(900px 600px at 75% -5%, rgba(255, 255, 255, 0.05), transparent 60%),
+      radial-gradient(700px 500px at 5% 110%, rgba(255, 255, 255, 0.02), transparent 60%),
+      repeating-linear-gradient(to right, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 220px),
+      repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 220px);
+    background-attachment: fixed;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #262626 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes icon-pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .pill-nav {
+    @apply inline-flex items-center gap-1 p-1 rounded-full bg-black/50 border border-white/[0.06] backdrop-blur-xl shadow-lg shadow-black/40;
+  }
+  .pill {
+    @apply relative flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium text-white/45 transition-all duration-200 whitespace-nowrap select-none active:scale-[0.97];
+  }
+  .pill svg {
+    @apply transition-transform duration-200;
+  }
+  .pill:hover:not(.pill-active) {
+    @apply bg-white/5 text-white/90;
+  }
+  .pill:hover:not(.pill-active) svg {
+    transform: scale(1.15) rotate(-5deg);
+  }
+  .pill-active {
+    @apply bg-white text-black shadow-sm;
+  }
+  .pill-active svg {
+    animation: icon-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pill-active:hover {
+    @apply bg-white text-black;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .card {
+    @apply bg-surface-900/60 border border-white/5 rounded-2xl backdrop-blur-sm;
+  }
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply -translate-y-0.5 border-white/10 shadow-xl shadow-black/30;
+  }
+  .btn-primary {
+    @apply bg-white hover:bg-white/90 text-black font-medium px-4 py-2 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-white/5 hover:bg-white/10 text-surface-200 font-medium px-4 py-2 rounded-full transition-all duration-200 border border-white/10 active:scale-95;
+  }
+  .btn-danger {
+    @apply bg-red-500/10 hover:bg-red-500/20 text-red-400 font-medium px-4 py-2 rounded-full transition-all duration-200 border border-red-500/20 active:scale-95;
+  }
+  .btn-ghost {
+    @apply hover:bg-white/5 text-surface-400 hover:text-white px-3 py-2 rounded-full transition-all duration-200 active:scale-95;
+  }
+  .input {
+    @apply bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder-surface-500 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500/40 transition-all duration-200 w-full;
+  }
+  .select {
+    @apply bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500/40 transition-all duration-200 w-full appearance-none cursor-pointer;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-green {
+    @apply badge bg-white text-black border border-white;
+  }
+  .badge-yellow {
+    @apply badge bg-white/10 text-white/70 border border-white/15;
+  }
+  .badge-red {
+    @apply badge bg-white/15 text-white border border-white/25;
+  }
+  .badge-gray {
+    @apply badge bg-white/5 text-surface-400 border border-white/10;
+  }
+  .badge-blue {
+    @apply badge bg-transparent text-surface-400 border border-white/10;
+  }
+  .table-row {
+    @apply border-b border-white/5 hover:bg-white/[0.03] transition-colors;
+  }
+  .stagger > * {
+    animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-grow-x {
+    animation: grow-x 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: left center;
+  }
+  .stagger > *:nth-child(1) { animation-delay: 0.03s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.07s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.11s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.15s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.19s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.23s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.27s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.31s; }
+  .stagger > *:nth-child(n + 9) { animation-delay: 0.35s; }
+}
